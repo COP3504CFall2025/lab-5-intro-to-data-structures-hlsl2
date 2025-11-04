@@ -121,26 +121,28 @@ public:
 			delete head;
 			head = nullptr;
 			--count;
-			return;
+			return false;
 		}
 		Node* temp = head->next;
 		temp->prev = nullptr;
 		delete head;
 		head = temp;
 		--count;
+		return true;
 	}
 	bool removeTail() {
 		if (count == 1) {
 			delete tail;
 			tail = nullptr;
 			--count;
-			return;
+			return false;
 		}
 		Node* temp = tail->prev;
 		temp->next = nullptr;
 		delete tail;
 		tail = temp;
 		--count;
+		return true;
 	}
 	void Clear() {
 		while (count > 0) {
