@@ -72,13 +72,11 @@ public:
         if (size == capacity) {
             reallocate();
         }
-        T val = arr[0];
         for (int i = 0; i < size; ++i) {
             arr[size] = arr[size - i];
         }
         arr[0] = item;
         ++size;
-        return val;
     }
     void pushBack(const T& item) override {
         if (size == capacity) {
