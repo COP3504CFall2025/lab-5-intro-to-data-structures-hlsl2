@@ -63,7 +63,7 @@ public:
         rhs.size = 0;
         rhs.arr = nullptr;
     }
-    ~ABDQ() override {
+    ~ABDQ() noexcept {
         delete[] arr;
     }
 
