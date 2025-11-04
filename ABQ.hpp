@@ -18,7 +18,7 @@ class ABQ : public QueueInterface<T>{
         T* temp = arr;
         capacity *= SCALE_FACTOR;
         arr = new T[capacity];
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             arr[i] = temp[i];
         }
         delete[] temp;
@@ -29,7 +29,7 @@ public:
     explicit ABQ(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABQ(const ABQ& other) {
         *this = ABQ(other.capacity);
-        for (int i = 0; i < other.size; ++i) {
+        for (size_t i = 0; i < other.size; ++i) {
             this->arr[i] = other.arr[i];
         }
     }
@@ -47,7 +47,7 @@ public:
         }
         delete this;
         *this = ABQ(rhs.capacity);
-        for (int i = 0; i < rhs.size; ++i) {
+        for (size_t i = 0; i < rhs.size; ++i) {
             this->arr[i] = rhs.arr[i];
         }
     }
@@ -95,7 +95,7 @@ public:
     T dequeue() override {
         T val = arr[0];
         --size;
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             arr[i] = arr[i + 1]
         }
         return val;

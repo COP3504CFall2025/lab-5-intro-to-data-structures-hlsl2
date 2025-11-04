@@ -19,7 +19,7 @@ private:
         T* temp = arr;
         capacity *= SCALE_FACTOR;
         arr = new T[capacity];
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             arr[i] = temp[i];
         }
         delete[] temp;
@@ -30,7 +30,7 @@ public:
     explicit ABDQ(std::size_t c) : capacity(c), size(0), front_(0), back_(0), arr(new T[1]) {}
     ABDQ(const ABDQ& adq) {
         *this = ABDQ(adq.capacity);
-        for (int i = 0; i < adq.size; ++i) {
+        for (size_t i = 0; i < adq.size; ++i) {
             this->arr[i] = adq.arr[i];
         }
     }
@@ -48,7 +48,7 @@ public:
         }
         delete this;
         *this = ABDQ(rhs.capacity);
-        for (int i = 0; i < rhs.size; ++i) {
+        for (size_t i = 0; i < rhs.size; ++i) {
             this->arr[i] = rhs.arr[i];
         }
     }
@@ -72,7 +72,7 @@ public:
         if (size == capacity) {
             reallocate();
         }
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             arr[size] = arr[size - i];
         }
         arr[0] = item;
@@ -90,7 +90,7 @@ public:
     T popFront() override {
         T val = arr[0];
         --size;
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             arr[i] = arr[i + 1];
         }
         return val;
