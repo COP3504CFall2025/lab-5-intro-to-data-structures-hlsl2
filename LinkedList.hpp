@@ -17,7 +17,7 @@ class LinkedList {
 	Node* tail;
 	unsigned int count;
 public:
-	LinkedList() head(nullptr), tail(nullptr), count(0) {}
+	LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 	LinkedList(const LinkedList<T>& list) {
 		Node* ptr = list.head;
 		while (this->count < list.count) {
