@@ -9,34 +9,95 @@ using std::size_t;
 
 template<typename T>
 class ABQ : public QueueInterface<T>{
+    size_t capacity;
+    size_t size;
+    T* arr;
+    static constexpr size_t SCALE_FACTOR = 2;
 
-    size_t capacity_;
-    size_t curr_size_;
-    T* array_;
-    static constexpr size_t scale_factor_ = 2;
-
+    void reallocate() {
+        T* temp = arr;
+        capacity *= SCALE_FACTOR;
+        arr = T[capacity];
+        for (int i = 0; i < size; ++i) {
+            arr[i] = temp[i];
+        }
+        delete[] temp;
+    }
 public:
     // Constructors + Big 5
-    ABQ();
-    explicit ABQ(const size_t capacity);
-    ABQ(const ABQ& other);
-    ABQ& operator=(const ABQ& rhs);
-    ABQ(ABQ&& other) noexcept;
-    ABQ& operator=(ABQ&& rhs) noexcept;
-    ~ABQ() noexcept override;
+    ABQ() : capacity(1), size(0), arr(T[1]) {}
+    explicit ABQ(const size_t c) : capacity(c), size(0), arr(T[c]) {}
+    ABQ(const ABQ& other) {
+        *this = ABQ(other.capacity);
+        for (int i = 0; i < other.size; ++i) {
+            this->arr[i] = other.arr[i];
+        }
+    }
+    ABQ(ABQ&& other) noexcept {
+        *this = ABQ(other.capacity);
+        this->size = other.size;
+        this->arr = other.arr;
+        other.capacity = 1;
+        other.size = 0;
+        other.arr = nullptr;
+    }
+    ABQ& operator=(const ABQ& rhs) {
+        if (this->arr == rhs.arr) {
+            return *this;
+        }
+        delete this;
+        *this = ABQ(rhs.capacity);
+        for (int i = 0; i < rhs.size; ++i) {
+            this->arr[i] = rhs.arr[i];
+        }
+    }
+    ABQ& operator=(ABQ&& rhs) noexcept {
+        if (this->arr == rhs.arr) {
+            return *this;
+        }
+        *this = ABS(other.capacity);
+        this->size = other.size;
+        this->arr = other.arr;
+        other.capacity = 1;
+        other.size = 0;
+        other.arr = nullptr;
+    }
+    ~ABQ() noexcept override {
+        delete[] arr;
+    }
 
     // Getters
-    [[nodiscard]] size_t getSize() const noexcept override;
-    [[nodiscard]] size_t getMaxCapacity() const noexcept;
-    [[nodiscard]] T* getData() const noexcept;
+    [[nodiscard]] size_t getSize() const noexcept override {
+        return size;
+    }
+    [[nodiscard]] size_t getMaxCapacity() const noexcept {
+        return capacity;
+    }
+    [[nodiscard]] T* getData() const noexcept {
+        return arr;
+    }
 
     // Insertion
-    void enqueue(const T& data) override;
+    void enqueue(const T& data) override {
+        if (size == capacity) {
+            reallocate();
+        }
+        arr[size] = data;
+        ++size;
+    }
 
     // Access
-    T peek() const override;
+    T peek() const override {
+        return arr[0];
+    }
 
     // Deletion
-    T dequeue() override;
-
+    T dequeue() override {
+        T val = arr[0];
+        --size;
+        for (int i = 0; i < size; ++i) {
+            arr[i] = arr[i + 1]
+        }
+        return val;
+    }
 };

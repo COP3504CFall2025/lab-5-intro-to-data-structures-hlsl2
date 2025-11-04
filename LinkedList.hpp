@@ -35,7 +35,7 @@ public:
 	}
 	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
 		if (this->head == rhs.head) {
-			return;
+			return *this;
 		}
 		delete this;
 		Node* ptr = rhs.head;
@@ -46,7 +46,7 @@ public:
 	}
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
 		if (this->head == other.head) {
-			return;
+			return *this;
 		}
 		head = other.head;
 		tail = other.tail;
