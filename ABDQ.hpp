@@ -47,7 +47,7 @@ public:
             return *this;
         }
         delete this;
-        *this = ABQ(rhs.capacity);
+        *this = ABDQ(rhs.capacity);
         for (int i = 0; i < rhs.size; ++i) {
             this->arr[i] = rhs.arr[i];
         }
@@ -56,7 +56,7 @@ public:
         if (this->arr == rhs.arr) {
             return *this;
         }
-        *this = ABS(other.capacity);
+        *this = ABDQ(other.capacity);
         this->size = other.size;
         this->arr = other.arr;
         other.capacity = 1;
