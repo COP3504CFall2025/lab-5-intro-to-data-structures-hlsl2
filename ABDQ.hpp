@@ -11,8 +11,8 @@ private:
     T* arr;
     std::size_t capacity;
     std::size_t size;
-    std::size_t front;
-    std::size_t back;
+    std::size_t front_;
+    std::size_t back_;
     static constexpr std::size_t SCALE_FACTOR = 2;
 
     void reallocate() {
