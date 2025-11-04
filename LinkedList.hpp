@@ -20,8 +20,8 @@ public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 	LinkedList(const LinkedList<T>& list) {
 		Node* ptr = list.head;
-		while (this->count < list.count) {
-			this->addTail(ptr->data);
+		while (count < list.count) {
+			addTail(ptr->data);
 			ptr = ptr->next;
 		}
 	}
@@ -34,19 +34,19 @@ public:
 		other.count = 0;
 	}
 	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
-		if (this->head == rhs.head) {
+		if (head == rhs.head) {
 			return *this;
 		}
 		delete this;
 		Node* ptr = rhs.head;
-		while (this->count < rhs.count) {
-			this->addTail(ptr->data);
+		while (count < rhs.count) {
+			addTail(ptr->data);
 			ptr = ptr->next;
 		}
 		return *this;
 	}
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
-		if (this->head == other.head) {
+		if (head == other.head) {
 			return *this;
 		}
 		head = other.head;
@@ -58,7 +58,7 @@ public:
 		return *this;
 	}
 	~LinkedList() {
-		this->clear();
+		clear();
 	}
 	// Behaviors
 	void printForward() const {

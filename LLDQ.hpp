@@ -12,7 +12,7 @@ template <typename T>
 class LLDQ : public DequeInterface<T> {
     LinkedList<T> list;
 public:
-    LLDQ() : list();
+    LLDQ() : list() {}
 	LLDQ(const LLDQ<T>& lldq) {
         list = LinkedList(lldq.list);
 	}

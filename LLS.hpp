@@ -9,7 +9,7 @@ template <typename T>
 class LLS : public StackInterface<T> {
     LinkedList<T> list;
 public:
-    LLS() : list();
+    LLS() : list() {}
 	LLS(const LLS<T>& lls) {
         list = LinkedList(lls.list);
 	}

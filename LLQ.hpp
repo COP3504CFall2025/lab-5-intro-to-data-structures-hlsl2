@@ -9,7 +9,7 @@ template <typename T>
 class LLQ : public QueueInterface<T> {
     LinkedList<T> list;
 public:
-    LLQ() : list();
+    LLQ() : list() {}
 	LLQ(const LLQ<T>& llq) {
         list = LinkedList(llq.list);
 	}
