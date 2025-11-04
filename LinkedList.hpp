@@ -56,7 +56,7 @@ public:
 		other.count = 0;
 	}
 	~LinkedList() {
-		this->Clear();
+		this->clear();
 	}
 	// Behaviors
 	void printForward() const {
@@ -144,7 +144,7 @@ public:
 		--count;
 		return true;
 	}
-	void Clear() {
+	void clear() {
 		while (count > 0) {
 			removeHead();
 		}
