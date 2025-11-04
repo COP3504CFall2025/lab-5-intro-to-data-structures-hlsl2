@@ -119,11 +119,14 @@ public:
 
 	// Removal
 	bool removeHead() {
+		if (count == 0) {
+			return false;
+		}
 		if (count == 1) {
 			delete head;
 			head = nullptr;
 			--count;
-			return false;
+			return true;
 		}
 		Node* temp = head->next;
 		temp->prev = nullptr;
@@ -133,11 +136,14 @@ public:
 		return true;
 	}
 	bool removeTail() {
+		if (count == 0) {
+			return false;
+		}
 		if (count == 1) {
 			delete tail;
 			tail = nullptr;
 			--count;
-			return false;
+			return true;
 		}
 		Node* temp = tail->prev;
 		temp->next = nullptr;
