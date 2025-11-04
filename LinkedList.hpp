@@ -125,6 +125,7 @@ public:
 		if (count == 1) {
 			delete head;
 			head = nullptr;
+			tail = nullptr;
 			--count;
 			return true;
 		}
@@ -142,6 +143,7 @@ public:
 		if (count == 1) {
 			delete tail;
 			tail = nullptr;
+			head = nullptr;
 			--count;
 			return true;
 		}
