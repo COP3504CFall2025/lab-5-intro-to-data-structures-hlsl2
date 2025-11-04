@@ -73,7 +73,7 @@ public:
             reallocate();
         }
         for (int i = 0; i < size; ++i) {
-            arr[size] = arr[size - i]
+            arr[size] = arr[size - i];
         }
         arr[0] = item;
         ++size;
@@ -92,7 +92,7 @@ public:
         T val = arr[0];
         --size;
         for (int i = 0; i < size; ++i) {
-            arr[i] = arr[i + 1]
+            arr[i] = arr[i + 1];
         }
         return val;
     }
