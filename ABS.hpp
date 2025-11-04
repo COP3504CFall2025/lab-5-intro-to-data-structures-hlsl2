@@ -64,7 +64,7 @@ public:
         other.arr = nullptr;
         return *this;
     }
-    ~ABS() noexcept override {
+    ~ABS() noexcept {
         delete[] arr;
     }
 

@@ -64,7 +64,7 @@ public:
         rhs.arr = nullptr;
         return *this;
     }
-    ~ABQ() noexcept override {
+    ~ABQ() noexcept {
         delete[] arr;
     }
 
