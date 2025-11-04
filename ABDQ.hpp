@@ -42,7 +42,7 @@ public:
         other.size = 0;
         other.arr = nullptr;
     }
-    ABDQ& operator=(const ABDQ& other) {
+    ABDQ& operator=(const ABDQ& rhs) {
         if (this->arr == rhs.arr) {
             return *this;
         }
