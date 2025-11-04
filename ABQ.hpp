@@ -56,12 +56,12 @@ public:
         if (this->arr == rhs.arr) {
             return *this;
         }
-        *this = ABQ(other.capacity);
-        this->size = other.size;
-        this->arr = other.arr;
-        other.capacity = 1;
-        other.size = 0;
-        other.arr = nullptr;
+        *this = ABQ(rhs.capacity);
+        this->size = rhs.size;
+        this->arr = rhs.arr;
+        rhs.capacity = 1;
+        rhs.size = 0;
+        rhs.arr = nullptr;
         return *this;
     }
     ~ABQ() noexcept override {
