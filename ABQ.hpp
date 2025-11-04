@@ -56,7 +56,7 @@ public:
         if (this->arr == rhs.arr) {
             return *this;
         }
-        *this = ABS(other.capacity);
+        *this = ABQ(other.capacity);
         this->size = other.size;
         this->arr = other.arr;
         other.capacity = 1;
@@ -98,7 +98,7 @@ public:
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
-            arr[i] = arr[i + 1]
+            arr[i] = arr[i + 1];
         }
         return val;
     }
