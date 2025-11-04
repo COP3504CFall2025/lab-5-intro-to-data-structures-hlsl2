@@ -52,7 +52,7 @@ public:
             this->arr[i] = rhs.arr[i];
         }
     }
-    ABDQ& operator=(ABDQ&& other) noexcept {
+    ABDQ& operator=(ABDQ&& rhs) noexcept {
         if (this->arr == rhs.arr) {
             return *this;
         }
