@@ -51,6 +51,7 @@ public:
         for (size_t i = 0; i < rhs.size; ++i) {
             this->arr[i] = rhs.arr[i];
         }
+        return *this;
     }
     ABDQ& operator=(ABDQ&& rhs) noexcept {
         if (this->arr == rhs.arr) {
@@ -62,6 +63,7 @@ public:
         rhs.capacity = 1;
         rhs.size = 0;
         rhs.arr = nullptr;
+        return *this;
     }
     ~ABDQ() noexcept {
         delete[] arr;

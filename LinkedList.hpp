@@ -43,6 +43,7 @@ public:
 			this->addTail(ptr->data);
 			ptr = ptr->next;
 		}
+		return *this;
 	}
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
 		if (this->head == other.head) {
@@ -54,6 +55,7 @@ public:
 		other.head = nullptr;
 		other.tail = nullptr;
 		other.count = 0;
+		return *this;
 	}
 	~LinkedList() {
 		this->clear();
