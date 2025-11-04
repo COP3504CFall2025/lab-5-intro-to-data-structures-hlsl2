@@ -50,6 +50,7 @@ public:
     T dequeue() override {
         T val = (*list.getHead()).data;
         list.removeHead();
+        return val;
     }
     T peek() const override {
         return (*list.getHead()).data;

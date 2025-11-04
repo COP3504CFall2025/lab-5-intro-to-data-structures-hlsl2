@@ -50,6 +50,7 @@ public:
     T pop() override {
         T val = (*list.getTail()).data;
         list.removeTail();
+        return val;
     }
     T peek() const override {
         return (*list.getTail()).data;

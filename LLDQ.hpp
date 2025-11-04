@@ -56,10 +56,12 @@ public:
     T popFront() override {
         T val = (*list.getHead()).data;
         list.removeHead();
+        return val;
     }
     T popBack() override {
         T val = (*list.getTail()).data;
         list.removeTail();
+        return val;
     }
     const T& front() const override {
         return (*list.getHead()).data;
