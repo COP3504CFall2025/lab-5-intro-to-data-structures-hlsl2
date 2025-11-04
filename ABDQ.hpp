@@ -72,6 +72,7 @@ public:
         if (size == capacity) {
             reallocate();
         }
+        T val = arr[0];
         for (int i = 0; i < size; ++i) {
             arr[size] = arr[size - i];
         }
