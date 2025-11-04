@@ -17,7 +17,7 @@ class ABS : public StackInterface<T> {
     void reallocate() {
         T* temp = arr;
         capacity *= SCALE_FACTOR;
-        arr = T[capacity];
+        arr = new T[capacity];
         for (int i = 0; i < size; ++i) {
             arr[i] = temp[i];
         }
@@ -25,8 +25,8 @@ class ABS : public StackInterface<T> {
     }
 public:
     // Big 5 + Parameterized Constructor
-    ABS() : capacity(1), size(0), arr(T[1]) {}
-    explicit ABS(const size_t c) : capacity(c), size(0), arr(T[c]) {}
+    ABS() : capacity(1), size(0), arr(new T[1]) {}
+    explicit ABS(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABS(const ABS& other) {
         *this = ABS(other.capacity);
         for (int i = 0; i < other.size; ++i) {

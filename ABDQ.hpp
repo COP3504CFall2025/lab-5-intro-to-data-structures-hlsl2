@@ -18,7 +18,7 @@ private:
     void reallocate() {
         T* temp = arr;
         capacity *= SCALE_FACTOR;
-        arr = T[capacity];
+        arr = new T[capacity];
         for (int i = 0; i < size; ++i) {
             arr[i] = temp[i];
         }
@@ -26,8 +26,8 @@ private:
     }
 public:
     // Big 5
-    ABDQ() : capacity(1), size(0), front(0), back(0), arr(T[1]) {}
-    explicit ABDQ(std::size_t c) : capacity(c), size(0), front(0), back(0), arr(T[1]) {}
+    ABDQ() : capacity(1), size(0), front_(0), back_(0), arr(new T[1]) {}
+    explicit ABDQ(std::size_t c) : capacity(c), size(0), front_(0), back_(0), arr(new T[1]) {}
     ABDQ(const ABDQ& adq) {
         *this = ABDQ(adq.capacity);
         for (int i = 0; i < adq.size; ++i) {

@@ -17,7 +17,7 @@ class ABQ : public QueueInterface<T>{
     void reallocate() {
         T* temp = arr;
         capacity *= SCALE_FACTOR;
-        arr = T[capacity];
+        arr = new T[capacity];
         for (int i = 0; i < size; ++i) {
             arr[i] = temp[i];
         }
@@ -25,8 +25,8 @@ class ABQ : public QueueInterface<T>{
     }
 public:
     // Constructors + Big 5
-    ABQ() : capacity(1), size(0), arr(T[1]) {}
-    explicit ABQ(const size_t c) : capacity(c), size(0), arr(T[c]) {}
+    ABQ() : capacity(1), size(0), arr(new T[1]) {}
+    explicit ABQ(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABQ(const ABQ& other) {
         *this = ABQ(other.capacity);
         for (int i = 0; i < other.size; ++i) {
