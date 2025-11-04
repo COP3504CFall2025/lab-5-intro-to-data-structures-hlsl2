@@ -41,19 +41,19 @@ public:
         other.size = 0;
         other.arr = nullptr;
     }
-    ABS& operator=(const ABS& rhs) {
-        if (this->arr == rhs.arr) {
+    ABS& operator=(const ABS& other) {
+        if (this->arr == other.arr) {
             return *this;
         }
         delete this;
-        *this = ABS(rhs.capacity);
-        for (size_t i = 0; i < rhs.size; ++i) {
-            this->arr[i] = rhs.arr[i];
+        *this = ABS(other.capacity);
+        for (size_t i = 0; i < other.size; ++i) {
+            this->arr[i] = other.arr[i];
         }
         return *this;
     }
-    ABS& operator=(ABS&& rhs) noexcept {
-        if (this->arr == rhs.arr) {
+    ABS& operator=(ABS&& other) noexcept {
+        if (this->arr == other.arr) {
             return *this;
         }
         *this = ABS(other.capacity);

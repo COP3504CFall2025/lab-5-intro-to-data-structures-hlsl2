@@ -41,27 +41,27 @@ public:
         other.size = 0;
         other.arr = nullptr;
     }
-    ABQ& operator=(const ABQ& rhs) {
-        if (this->arr == rhs.arr) {
+    ABQ& operator=(const ABQ& other) {
+        if (this->arr == other.arr) {
             return *this;
         }
         delete this;
-        *this = ABQ(rhs.capacity);
-        for (size_t i = 0; i < rhs.size; ++i) {
-            this->arr[i] = rhs.arr[i];
+        *this = ABQ(other.capacity);
+        for (size_t i = 0; i < other.size; ++i) {
+            this->arr[i] = other.arr[i];
         }
         return *this;
     }
-    ABQ& operator=(ABQ&& rhs) noexcept {
-        if (this->arr == rhs.arr) {
+    ABQ& operator=(ABQ&& other) noexcept {
+        if (this->arr == other.arr) {
             return *this;
         }
-        *this = ABQ(rhs.capacity);
-        this->size = rhs.size;
-        this->arr = rhs.arr;
-        rhs.capacity = 1;
-        rhs.size = 0;
-        rhs.arr = nullptr;
+        *this = ABQ(other.capacity);
+        this->size = other.size;
+        this->arr = other.arr;
+        other.capacity = 1;
+        other.size = 0;
+        other.arr = nullptr;
         return *this;
     }
     ~ABQ() noexcept {
