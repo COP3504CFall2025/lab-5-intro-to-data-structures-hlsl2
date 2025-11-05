@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include "Interfaces.hpp"
 #include <utility>
-#include <iostream>
 
 template <typename T>
 class ABDQ : public DequeInterface<T> {
@@ -102,7 +101,6 @@ public:
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
-            std::cout << i << " " << size << " " << capacity << std::endl;
             arr[i] = arr[i + 1];
         }
         return val;
@@ -117,9 +115,15 @@ public:
 
     // Access
     const T& front() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty deque");
+        }
         return arr[0];
     }
     const T& back() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty deque");
+        }
         return arr[size - 1];
     }
 
