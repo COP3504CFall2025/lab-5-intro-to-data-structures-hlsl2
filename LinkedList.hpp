@@ -62,7 +62,7 @@ public:
 		Clear();
 	}
 	// Behaviors
-	void PrintForward() const {
+	void printForward() const {
 		Node* ptr = head;
 		for (size_t i = 0; i < count; ++i) {
 			ptr->print();
