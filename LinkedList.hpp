@@ -98,7 +98,7 @@ public:
 	void AddHead(const T& data) {
 		Node* temp = head;
 		head = new Node(data);
-		if (temp) {
+		if (temp->prev) {
 			temp->prev = head;
 		} else {
 			tail = head;
@@ -109,7 +109,7 @@ public:
 	void AddTail(const T& data) {
 		Node* temp = tail;
 		tail = new Node(data);
-		if (temp) {
+		if (temp->next) {
 			temp->next = tail;
 		} else {
 			head = tail;
