@@ -38,11 +38,17 @@ public:
         list.AddTail(item);
     }
     T pop() override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot pop empty stack");
+        }
         T val = (*list.getTail()).data;
         list.RemoveTail();
         return val;
     }
     T peek() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty stack");
+        }
         return (*list.getTail()).data;
     }
     std::size_t getSize() const noexcept override {

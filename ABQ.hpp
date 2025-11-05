@@ -95,11 +95,17 @@ public:
 
     // Access
     T peek() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty queue");
+        }
         return arr[0];
     }
 
     // Deletion
     T dequeue() override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot pop empty queue");
+        }
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {

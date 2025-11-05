@@ -44,19 +44,31 @@ public:
         list.AddTail(item);
     }
     T popFront() override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot pop empty deque");
+        }
         T val = (*list.getHead()).data;
         list.RemoveHead();
         return val;
     }
     T popBack() override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot pop empty deque");
+        }
         T val = (*list.getTail()).data;
         list.RemoveTail();
         return val;
     }
     const T& front() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty deque");
+        }
         return (*list.getHead()).data;
     }
     const T& back() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty deque");
+        }
         return (*list.getTail()).data;
     }
     std::size_t getSize() const noexcept override {

@@ -98,10 +98,16 @@ public:
     }
 
     T peek() const override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot access empty stack");
+        }
         return arr[size];
     }
 
     T pop() override {
+        if (size == 0) {
+            throw std::runtime_error("Cannot pop empty stack");
+        }
         --size;
         return arr[size];
     }
