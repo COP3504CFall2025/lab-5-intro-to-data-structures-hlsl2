@@ -68,6 +68,9 @@ public:
     }
     ~ABS() noexcept {
         delete[] arr;
+        arr = nullptr;
+        size = 0;
+        capacity = 1;
     }
 
     // Get the number of items in the ABS

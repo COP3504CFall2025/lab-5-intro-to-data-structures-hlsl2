@@ -69,6 +69,9 @@ public:
     }
     ~ABDQ() noexcept {
         delete[] arr;
+        arr = nullptr;
+        size = 0;
+        capacity = 1;
     }
 
     // Insertion

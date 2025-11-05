@@ -68,6 +68,9 @@ public:
     }
     ~ABQ() noexcept {
         delete[] arr;
+        arr = nullptr;
+        size = 0;
+        capacity = 1;
     }
 
     // Getters
