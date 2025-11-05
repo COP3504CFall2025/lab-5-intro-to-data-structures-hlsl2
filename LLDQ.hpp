@@ -17,12 +17,7 @@ public:
         list = LinkedList(lldq.list);
 	}
 	LLDQ(LLDQ<T>&& other) noexcept {
-		list.head = other.list.head;
-		list.tail = other.list.tail;
-		list.count = other.list.count;
-		other.list.head = nullptr;
-		other.list.tail = nullptr;
-		other.list.count = 0;
+		list = std::move(other.list);
 	}
 	LLDQ<T>& operator=(const LLDQ<T>& rhs) {
 		if (list.head == rhs.list.head) {
