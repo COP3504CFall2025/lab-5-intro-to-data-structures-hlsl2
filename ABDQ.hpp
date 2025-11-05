@@ -29,15 +29,17 @@ public:
     ABDQ() : capacity(1), size(0), front_(0), back_(0), arr(new T[1]) {}
     explicit ABDQ(std::size_t c) : capacity(c), size(0), front_(0), back_(0), arr(new T[1]) {}
     ABDQ(const ABDQ& adq) {
-        *this = ABDQ(adq.capacity);
+        capacity = other.capacity;
+        size = 0;
+        arr = new T[capacity];
         for (size_t i = 0; i < adq.size; ++i) {
             this->arr[i] = adq.arr[i];
         }
     }
     ABDQ(ABDQ&& other) noexcept {
-        *this = ABDQ(other.capacity);
-        this->size = other.size;
-        this->arr = other.arr;
+        capacity = other.capacity;
+        size = other.size;
+        arr = other.arr;
         other.capacity = 1;
         other.size = 0;
         other.arr = nullptr;

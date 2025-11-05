@@ -28,15 +28,17 @@ public:
     ABQ() : capacity(1), size(0), arr(new T[1]) {}
     explicit ABQ(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABQ(const ABQ& other) {
-        *this = ABQ(other.capacity);
+        capacity = other.capacity;
+        size = 0;
+        arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
             this->arr[i] = other.arr[i];
         }
     }
     ABQ(ABQ&& other) noexcept {
-        *this = ABQ(other.capacity);
-        this->size = other.size;
-        this->arr = other.arr;
+        capacity = other.capacity;
+        size = other.size;
+        arr = other.arr;
         other.capacity = 1;
         other.size = 0;
         other.arr = nullptr;

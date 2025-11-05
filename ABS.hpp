@@ -28,15 +28,17 @@ public:
     ABS() : capacity(1), size(0), arr(new T[1]) {}
     explicit ABS(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABS(const ABS& other) {
-        *this = ABS(other.capacity);
+        capacity = other.capacity;
+        size = 0;
+        arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
-            this->arr[i] = other.arr[i];
+            arr[i] = other.arr[i];
         }
     }
     ABS(ABS&& other) noexcept {
-        *this = ABS(other.capacity);
-        this->size = other.size;
-        this->arr = other.arr;
+        capacity = other.capacity;
+        size = other.size;
+        arr = other.arr;
         other.capacity = 1;
         other.size = 0;
         other.arr = nullptr;
