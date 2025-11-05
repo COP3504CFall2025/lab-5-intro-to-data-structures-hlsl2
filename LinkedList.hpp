@@ -159,6 +159,7 @@ public:
 	}
 	void Clear() {
 		while (count > 0) {
+			std::cout << head << std::endl;
 			RemoveHead();
 		}
 	}
