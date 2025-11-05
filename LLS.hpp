@@ -28,6 +28,7 @@ public:
 		if (list.getHead() == other.list.getHead()) {
 			return *this;
 		}
+        list.Clear();
 		list = std::move(other.list);
 		return *this;
 	}
