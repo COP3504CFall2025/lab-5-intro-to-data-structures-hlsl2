@@ -96,26 +96,28 @@ public:
 
 	// Insertion
 	void AddHead(const T& data) {
+		++count;
+		if (count == 1) {
+			head = new Node(data);
+			tail = head;
+			return;
+		}
 		Node* temp = head;
 		head = new Node(data);
-		if (temp) {
-			temp->prev = head;
-		} else {
-			tail = head;
-		}
+		temp->prev = head;
 		head->next = temp;
-		++count;
 	}
 	void AddTail(const T& data) {
+		++count;
+		if (count == 1) {
+			tail = new Node(data);
+			head = tail;
+			return;
+		}
 		Node* temp = tail;
 		tail = new Node(data);
-		if (temp) {
-			temp->next = tail;
-		} else {
-			head = tail;
-		}
+		temp->next = tail;
 		tail->prev = temp;
-		++count;
 	}
 
 	// Removal
