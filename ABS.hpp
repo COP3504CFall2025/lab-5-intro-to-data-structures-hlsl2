@@ -42,7 +42,7 @@ public:
         other.arr = nullptr;
     }
     ABS& operator=(const ABS& other) {
-        if (this->arr == other.arr) {
+        if (this->arr && this->arr == other.arr) {
             return *this;
         }
         delete this;
@@ -53,7 +53,7 @@ public:
         return *this;
     }
     ABS& operator=(ABS&& other) noexcept {
-        if (this->arr == other.arr) {
+        if (this->arr && this->arr == other.arr) {
             return *this;
         }
         *this = ABS(other.capacity);

@@ -42,7 +42,7 @@ public:
         other.arr = nullptr;
     }
     ABQ& operator=(const ABQ& other) {
-        if (this->arr == other.arr) {
+        if (this->arr && this->arr == other.arr) {
             return *this;
         }
         delete this;
@@ -53,7 +53,7 @@ public:
         return *this;
     }
     ABQ& operator=(ABQ&& other) noexcept {
-        if (this->arr == other.arr) {
+        if (this->arr && this->arr == other.arr) {
             return *this;
         }
         *this = ABQ(other.capacity);
