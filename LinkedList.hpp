@@ -38,7 +38,7 @@ public:
 		if (head == rhs.head) {
 			return *this;
 		}
-		delete this;
+		Clear();
 		Node* ptr = rhs.head;
 		while (count < rhs.count) {
 			AddTail(ptr->data);
@@ -79,6 +79,7 @@ public:
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const {
+		std::count << "get ll count" << std::endl;
 		return count;
 	}
 	Node* getHead() {
