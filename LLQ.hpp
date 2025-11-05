@@ -38,7 +38,7 @@ public:
         list.AddTail(item);
     }
     T dequeue() override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot pop empty queue");
         }
         T val = (*list.getHead()).data;
@@ -46,7 +46,7 @@ public:
         return val;
     }
     T peek() const override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot access empty queue");
         }
         return (*list.getHead()).data;

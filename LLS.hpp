@@ -38,7 +38,7 @@ public:
         list.AddTail(item);
     }
     T pop() override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot pop empty stack");
         }
         T val = (*list.getTail()).data;
@@ -46,7 +46,7 @@ public:
         return val;
     }
     T peek() const override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot access empty stack");
         }
         return (*list.getTail()).data;
