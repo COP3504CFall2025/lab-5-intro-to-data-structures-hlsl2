@@ -125,42 +125,37 @@ public:
 		if (count == 0) {
 			return false;
 		}
-		if (count == 1) {
+		--count;
+		if (count == 0) {
 			delete head;
 			head = nullptr;
 			tail = nullptr;
-			--count;
 			return true;
 		}
 		Node* temp = head->next;
-		temp->prev = nullptr;
 		delete head;
 		head = temp;
-		--count;
+		head->prev = nullptr;
 		return true;
 	}
 	bool RemoveTail() {
 		if (count == 0) {
 			return false;
 		}
-		if (count == 1) {
+		--count;
+		if (count == 0) {
 			delete tail;
 			tail = nullptr;
 			head = nullptr;
-			--count;
 			return true;
 		}
 		Node* temp = tail->prev;
-		temp->next = nullptr;
 		delete tail;
 		tail = temp;
-		--count;
+		tail->next = nullptr;
 		return true;
 	}
 	void Clear() {
-		while (count > 0) {
-			std::cout << head << std::endl;
-			RemoveHead();
-		}
+		while (RemoveHead());
 	}
 };
