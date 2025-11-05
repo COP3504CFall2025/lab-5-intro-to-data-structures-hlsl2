@@ -45,7 +45,7 @@ public:
 		return *this;
 	}
 	~LLDQ() {
-		list.clear();
+		list.Clear();
 	}
     void pushFront(const T& item) override {
         list.AddHead(item);
