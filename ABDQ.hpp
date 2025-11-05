@@ -99,7 +99,7 @@ public:
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
-            std::cout << i << std::endl;
+            std::cout << i << " " << size << " " << capacity << std::endl;
             arr[i] = arr[i + 1];
         }
         return val;
