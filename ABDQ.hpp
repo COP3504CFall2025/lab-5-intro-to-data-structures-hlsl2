@@ -48,7 +48,7 @@ public:
         if (this->arr && this->arr == other.arr) {
             return *this;
         }
-        delete this;
+        delete[] arr;
         *this = ABDQ(other.capacity);
         for (size_t i = 0; i < other.size; ++i) {
             this->arr[i] = other.arr[i];
