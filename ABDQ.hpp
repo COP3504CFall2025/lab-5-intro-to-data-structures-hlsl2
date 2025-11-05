@@ -97,7 +97,7 @@ public:
     // Deletion
     T popFront() override {
         if (size == 0) {
-            throw std::out_of_range("Cannot pop empty deque");
+            throw std::runtime_error("Cannot pop empty deque");
         }
         T val = arr[0];
         --size;
@@ -109,7 +109,7 @@ public:
     }
     T popBack() override {
         if (size == 0) {
-            throw std::out_of_range("Cannot pop empty deque");
+            throw std::runtime_error("Cannot pop empty deque");
         }
         --size;
         return arr[size];
