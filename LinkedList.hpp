@@ -19,6 +19,7 @@ class LinkedList {
 public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 	LinkedList(const LinkedList<T>& list) {
+		count = 0;
 		Node* ptr = list.head;
 		while (count < list.count) {
 			addTail(ptr->data);
