@@ -96,6 +96,9 @@ public:
 
     // Deletion
     T popFront() override {
+        if (size == 0) {
+            throw std::out_of_bounds("Cannot pop empty deque");
+        }
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
@@ -105,6 +108,9 @@ public:
         return val;
     }
     T popBack() override {
+        if (size == 0) {
+            throw std::out_of_bounds("Cannot pop empty deque");
+        }
         --size;
         return arr[size];
     }
@@ -121,5 +127,4 @@ public:
     std::size_t getSize() const noexcept override {
         return size;
     }
-
 };
