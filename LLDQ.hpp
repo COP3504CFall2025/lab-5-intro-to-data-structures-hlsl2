@@ -28,7 +28,7 @@ public:
 		return *this;
 	}
 	LLDQ<T>& operator=(LLDQ<T>&& other) noexcept {
-		if (this->getHead() == other.getHead()) {
+		if (list.getHead() == other.list.getHead()) {
 			return *this;
 		}
 		list = std::move(other.list);
