@@ -79,7 +79,7 @@ public:
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const {
-		std::count << "get ll count" << std::endl;
+		std::cout << "get ll count" << std::endl;
 		return count;
 	}
 	Node* getHead() {
