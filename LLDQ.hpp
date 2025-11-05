@@ -44,7 +44,7 @@ public:
         list.AddTail(item);
     }
     T popFront() override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot pop empty deque");
         }
         T val = (*list.getHead()).data;
@@ -52,7 +52,7 @@ public:
         return val;
     }
     T popBack() override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot pop empty deque");
         }
         T val = (*list.getTail()).data;
@@ -60,13 +60,13 @@ public:
         return val;
     }
     const T& front() const override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot access empty deque");
         }
         return (*list.getHead()).data;
     }
     const T& back() const override {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw std::runtime_error("Cannot access empty deque");
         }
         return (*list.getTail()).data;
