@@ -62,14 +62,14 @@ public:
 		Clear();
 	}
 	// Behaviors
-	void printForward() const {
+	void PrintForward() const {
 		Node* ptr = head;
 		for (size_t i = 0; i < count; ++i) {
 			ptr->print();
 			ptr = ptr->next;
 		}
 	}
-	void printReverse() const {
+	void PrintReverse() const {
 		Node* ptr = tail;
 		for (size_t i = 0; i < count; ++i) {
 			ptr->print();
