@@ -23,7 +23,7 @@ public:
 		if (list.getHead() == rhs.list.getHead()) {
 			return *this;
 		}
-		delete list;
+		delete this;
         list = LinkedList(rhs.list);
 		return *this;
 	}
