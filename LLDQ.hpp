@@ -48,19 +48,19 @@ public:
 		list.clear();
 	}
     void pushFront(const T& item) override {
-        list.addHead(item);
+        list.AddHead(item);
     }
     void pushBack(const T& item) override {
-        list.addTail(item);
+        list.AddTail(item);
     }
     T popFront() override {
         T val = (*list.getHead()).data;
-        list.removeHead();
+        list.RemoveHead();
         return val;
     }
     T popBack() override {
         T val = (*list.getTail()).data;
-        list.removeTail();
+        list.RemoveTail();
         return val;
     }
     const T& front() const override {

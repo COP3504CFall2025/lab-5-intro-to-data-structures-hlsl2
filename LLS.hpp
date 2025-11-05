@@ -42,14 +42,14 @@ public:
 		return *this;
 	}
 	~LLS() {
-		list.clear();
+		list.Clear();
 	}
     void push(const T& item) override {
-        list.addTail(item);
+        list.AddTail(item);
     }
     T pop() override {
         T val = (*list.getTail()).data;
-        list.removeTail();
+        list.RemoveTail();
         return val;
     }
     T peek() const override {

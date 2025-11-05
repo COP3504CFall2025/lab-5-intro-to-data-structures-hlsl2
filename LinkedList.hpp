@@ -22,7 +22,7 @@ public:
 		count = 0;
 		Node* ptr = list.head;
 		while (count < list.count) {
-			addTail(ptr->data);
+			AddTail(ptr->data);
 			ptr = ptr->next;
 		}
 	}
@@ -41,7 +41,7 @@ public:
 		delete this;
 		Node* ptr = rhs.head;
 		while (count < rhs.count) {
-			addTail(ptr->data);
+			AddTail(ptr->data);
 			ptr = ptr->next;
 		}
 		return *this;
@@ -59,7 +59,7 @@ public:
 		return *this;
 	}
 	~LinkedList() {
-		clear();
+		Clear();
 	}
 	// Behaviors
 	void printForward() const {
@@ -95,7 +95,7 @@ public:
 	}
 
 	// Insertion
-	void addHead(const T& data) {
+	void AddHead(const T& data) {
 		Node* temp = head;
 		head = new Node(data);
 		if (temp) {
@@ -106,7 +106,7 @@ public:
 		head->next = temp;
 		++count;
 	}
-	void addTail(const T& data) {
+	void AddTail(const T& data) {
 		Node* temp = tail;
 		tail = new Node(data);
 		if (temp) {
@@ -119,7 +119,7 @@ public:
 	}
 
 	// Removal
-	bool removeHead() {
+	bool RemoveHead() {
 		if (count == 0) {
 			return false;
 		}
@@ -137,7 +137,7 @@ public:
 		--count;
 		return true;
 	}
-	bool removeTail() {
+	bool RemoveTail() {
 		if (count == 0) {
 			return false;
 		}
@@ -155,9 +155,9 @@ public:
 		--count;
 		return true;
 	}
-	void clear() {
+	void Clear() {
 		while (count > 0) {
-			removeHead();
+			RemoveHead();
 		}
 	}
 };

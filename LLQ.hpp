@@ -42,14 +42,14 @@ public:
 		return *this;
 	}
 	~LLQ() {
-		list.clear();
+		list.Clear();
 	}
     void enqueue(const T& item) override {
-        list.addTail(item);
+        list.AddTail(item);
     }
     T dequeue() override {
         T val = (*list.getHead()).data;
-        list.removeHead();
+        list.RemoveHead();
         return val;
     }
     T peek() const override {
