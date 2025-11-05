@@ -14,15 +14,10 @@ public:
         list = LinkedList(llq.list);
 	}
 	LLQ(LLQ<T>&& other) noexcept {
-		list.head = other.list.head;
-		list.tail = other.list.tail;
-		list.count = other.list.count;
-		other.list.head = nullptr;
-		other.list.tail = nullptr;
-		other.list.count = 0;
+		list = std::move(other.list);
 	}
 	LLQ<T>& operator=(const LLQ<T>& rhs) {
-		if (list.head == rhs.list.head) {
+		if (list.getHead() == rhs.list.getHead()) {
 			return *this;
 		}
 		delete this;
@@ -30,15 +25,10 @@ public:
 		return *this;
 	}
 	LLQ<T>& operator=(LLQ<T>&& other) noexcept {
-		if (this->head == other.head) {
+		if (list.getHead() == other.list.getHead()) {
 			return *this;
 		}
-		list.head = other.list.head;
-		list.tail = other.list.tail;
-		list.count = other.list.count;
-		other.list.head = nullptr;
-		other.list.tail = nullptr;
-		other.list.count = 0;
+		list = std::move(other.list);
 		return *this;
 	}
 	~LLQ() {
