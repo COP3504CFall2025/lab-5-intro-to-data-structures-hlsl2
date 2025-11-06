@@ -29,7 +29,7 @@ public:
     explicit ABQ(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABQ(const ABQ& other) {
         capacity = other.capacity;
-        size = 0;
+        size = other.size;
         arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
             this->arr[i] = other.arr[i];
