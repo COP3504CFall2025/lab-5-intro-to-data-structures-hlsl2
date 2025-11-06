@@ -48,7 +48,9 @@ public:
             return *this;
         }
         delete this;
-        *this = ABQ(other.capacity);
+        capacity = other.capacity;
+        size = other.size;
+        arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
             this->arr[i] = other.arr[i];
         }
