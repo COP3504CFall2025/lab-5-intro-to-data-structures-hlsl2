@@ -163,6 +163,8 @@ public:
 			ptr = ptr->next;
 			delete temp;
 		}
+		head = nullptr;
+		tail = nullptr;
 		count = 0;
 	}
 };
