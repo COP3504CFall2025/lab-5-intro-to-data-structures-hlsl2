@@ -130,7 +130,7 @@ public:
 			delete head;
 			head = nullptr;
 			tail = nullptr;
-			return false;
+			return true;
 		}
 		Node* temp = head->next;
 		delete head;
@@ -147,7 +147,7 @@ public:
 			delete tail;
 			tail = nullptr;
 			head = nullptr;
-			return false;
+			return true;
 		}
 		Node* temp = tail->prev;
 		delete tail;
