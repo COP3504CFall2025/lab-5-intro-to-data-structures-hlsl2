@@ -23,6 +23,15 @@ class ABS : public StackInterface<T> {
         }
         delete[] temp;
     }
+    void deallocate() {
+        T* temp = arr;
+        capacity /= SCALE_FACTOR;
+        arr = new T[capacity];
+        for (size_t i = 0; i < size; ++i) {
+            arr[i] = temp[i];
+        }
+        delete[] temp;
+    }
 public:
     // Big 5 + Parameterized Constructor
     ABS() : capacity(1), size(0), arr(new T[1]) {}
@@ -109,6 +118,9 @@ public:
     T pop() override {
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty stack");
+        }
+        if (size <= capacity / 2) {
+            deallocate();
         }
         --size;
         return arr[size];

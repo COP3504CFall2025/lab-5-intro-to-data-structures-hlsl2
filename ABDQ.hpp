@@ -24,6 +24,15 @@ private:
         }
         delete[] temp;
     }
+    void deallocate() {
+        T* temp = arr;
+        capacity /= SCALE_FACTOR;
+        arr = new T[capacity];
+        for (size_t i = 0; i < size; ++i) {
+            arr[i] = temp[i];
+        }
+        delete[] temp;
+    }
 public:
     // Big 5
     ABDQ() : capacity(1), size(0), front_(0), back_(0), arr(new T[1]) {}
@@ -100,6 +109,9 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty deque");
         }
+        if (size <= capacity / 2) {
+            deallocate();
+        }
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
@@ -110,6 +122,9 @@ public:
     T popBack() override {
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty deque");
+        }
+        if (size <= capacity / 2) {
+            deallocate();
         }
         --size;
         return arr[size];

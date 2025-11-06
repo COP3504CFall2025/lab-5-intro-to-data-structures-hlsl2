@@ -23,6 +23,15 @@ class ABQ : public QueueInterface<T>{
         }
         delete[] temp;
     }
+    void deallocate() {
+        T* temp = arr;
+        capacity /= SCALE_FACTOR;
+        arr = new T[capacity];
+        for (size_t i = 0; i < size; ++i) {
+            arr[i] = temp[i];
+        }
+        delete[] temp;
+    }
 public:
     // Constructors + Big 5
     ABQ() : capacity(1), size(0), arr(new T[1]) {}
@@ -107,6 +116,9 @@ public:
     T dequeue() override {
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty queue");
+        }
+        if (size <= capacity / 2) {
+            deallocate();
         }
         T val = arr[0];
         --size;

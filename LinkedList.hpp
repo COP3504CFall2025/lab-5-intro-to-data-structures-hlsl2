@@ -156,15 +156,6 @@ public:
 		return true;
 	}
 	void Clear() {
-		//while (RemoveHead());
-		Node* ptr = head;
-		while(ptr) {
-			Node* temp = ptr;
-			ptr = ptr->next;
-			delete temp;
-		}
-		head = nullptr;
-		tail = nullptr;
-		count = 0;
+		while (RemoveHead());
 	}
 };
