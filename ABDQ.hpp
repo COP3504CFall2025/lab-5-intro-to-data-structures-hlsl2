@@ -33,7 +33,7 @@ public:
         size = other.size;
         arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
-            this->arr[i] = other.arr[i];
+            arr[i] = other.arr[i];
         }
     }
     ABDQ(ABDQ&& other) noexcept {
@@ -45,7 +45,7 @@ public:
         other.arr = nullptr;
     }
     ABDQ& operator=(const ABDQ& other) {
-        if (this->arr && this->arr == other.arr) {
+        if (arr && arr == other.arr) {
             return *this;
         }
         delete[] arr;
