@@ -61,9 +61,9 @@ public:
         if (this->arr && this->arr == other.arr) {
             return *this;
         }
-        *this = ABDQ(other.capacity);
-        this->size = other.size;
-        this->arr = other.arr;
+        capacity = other.capacity;
+        size = other.size;
+        arr = other.arr;
         other.capacity = 1;
         other.size = 0;
         other.arr = nullptr;
