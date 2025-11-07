@@ -73,6 +73,7 @@ public:
         if (this == &other) {
             return *this;
         }
+        delete[] arr;
         capacity = other.capacity;
         size = other.size;
         arr = other.arr;
@@ -103,8 +104,8 @@ public:
         if (size == capacity) {
             reallocate(capacity * SCALE_FACTOR);
         }
-        ++back_; back_ %= capacity;
         arr[back_] = item;
+        ++back_; back_ %= capacity;
         ++size;
     }
 
@@ -125,9 +126,9 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot pop from empty deque");
         }
-        T val = arr[back_];
-        back_ -= capacity - 1; 
+        back_ += capacity - 1; 
         back_ %= capacity;
+        T val = arr[back_];
         --size;
         if (size > 0 && size <= capacity / 4) {
             reallocate(capacity / SCALE_FACTOR);
