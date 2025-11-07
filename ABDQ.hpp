@@ -19,10 +19,12 @@ private:
         T* temp = arr;
         capacity = c;
         arr = new T[capacity];
-        for (size_t i = 0; i < size; ++i) {
-            arr[i] = temp[i];
+        for (std::size_t i = 0; i < size; ++i) {
+            arr[i] = temp[(front_ + i) % capacity];
         }
         delete[] temp;
+        front_ = 0;
+        back_ = size;
     }
 public:
     // Big 5
@@ -31,18 +33,25 @@ public:
     ABDQ(const ABDQ& other) {
         capacity = other.capacity;
         size = other.size;
+        front_ = other.front_;
+        back_ = other.back_;
         arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
-            arr[i] = other.arr[i];
+            size_t idx =(front_ + i) % capacity;
+            arr[idx] = other.arr[idx];
         }
     }
     ABDQ(ABDQ&& other) noexcept {
         capacity = other.capacity;
         size = other.size;
         arr = other.arr;
+        front_ = other.front_;
+        back_ = other.back_;
         other.capacity = 1;
         other.size = 0;
         other.arr = nullptr;
+        other.front_ = 0;
+        other.back_ = 0;
     }
     ABDQ& operator=(const ABDQ& other) {
         if (this == &other) {
@@ -51,9 +60,12 @@ public:
         delete[] arr;
         capacity = other.capacity;
         size = other.size;
+        front_ = other.front_;
+        back_ = other.back_;
         arr = new T[capacity];
         for (size_t i = 0; i < other.size; ++i) {
-            this->arr[i] = other.arr[i];
+            size_t idx =(front_ + i) % capacity;
+            arr[idx] = other.arr[idx];
         }
         return *this;
     }
@@ -64,16 +76,17 @@ public:
         capacity = other.capacity;
         size = other.size;
         arr = other.arr;
+        front_ = other.front_;
+        back_ = other.back_;
         other.capacity = 1;
         other.size = 0;
         other.arr = nullptr;
+        other.front_ = 0;
+        other.back_ = 0;
         return *this;
     }
     ~ABDQ() noexcept {
         delete[] arr;
-        arr = nullptr;
-        size = 0;
-        capacity = 1;
     }
 
     // Insertion
@@ -81,30 +94,27 @@ public:
         if (size == capacity) {
             reallocate(capacity * SCALE_FACTOR);
         }
-        for (size_t i = 0; i < size; ++i) {
-            arr[size] = arr[size - i];
-        }
-        arr[0] = item;
+        --front_; front_ %= capacity;
+        arr[front_] = item;
         ++size;
     }
     void pushBack(const T& item) override {
         if (size == capacity) {
             reallocate(capacity * SCALE_FACTOR);
         }
-        arr[size] = item;
+        ++back_; back_ %= capacity;
+        arr[back_] = item;
         ++size;
     }
 
     // Deletion
     T popFront() override {
         if (size == 0) {
-            throw std::runtime_error("Cannot pop empty deque");
+            throw std::runtime_error("Cannot pop from empty deque");
         }
-        T val = arr[0];
+        T val = arr[front_];
+        ++front_; front_ %= capacity;
         --size;
-        for (size_t i = 0; i < size; ++i) {
-            arr[i] = arr[i + 1];
-        }
         if (size > 0 && size <= capacity / 4) {
             reallocate(capacity / SCALE_FACTOR);
         }
@@ -112,9 +122,11 @@ public:
     }
     T popBack() override {
         if (size == 0) {
-            throw std::runtime_error("Cannot pop empty deque");
+            throw std::runtime_error("Cannot pop from empty deque");
         }
-        T val = arr[--size];
+        T val = arr[back_];
+        --back_; back_ %= capacity;
+        --size;
         if (size > 0 && size <= capacity / 4) {
             reallocate(capacity / SCALE_FACTOR);
         }
@@ -126,13 +138,13 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot access empty deque");
         }
-        return arr[0];
+        return arr[front_];
     }
     const T& back() const override {
         if (size == 0) {
             throw std::runtime_error("Cannot access empty deque");
         }
-        return arr[size - 1];
+        return arr[back_];
     }
 
     // Getters
