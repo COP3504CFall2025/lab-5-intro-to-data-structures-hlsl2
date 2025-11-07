@@ -15,18 +15,9 @@ private:
     std::size_t back_;
     static constexpr std::size_t SCALE_FACTOR = 2;
 
-    void reallocate() {
+    void reallocate(size_t c) {
         T* temp = arr;
-        capacity *= SCALE_FACTOR;
-        arr = new T[capacity];
-        for (size_t i = 0; i < size; ++i) {
-            arr[i] = temp[i];
-        }
-        delete[] temp;
-    }
-    void deallocate() {
-        T* temp = arr;
-        capacity /= SCALE_FACTOR;
+        capacity = c;
         arr = new T[capacity];
         for (size_t i = 0; i < size; ++i) {
             arr[i] = temp[i];
@@ -54,7 +45,7 @@ public:
         other.arr = nullptr;
     }
     ABDQ& operator=(const ABDQ& other) {
-        if (arr && arr == other.arr) {
+        if (this == &other) {
             return *this;
         }
         delete[] arr;
@@ -67,7 +58,7 @@ public:
         return *this;
     }
     ABDQ& operator=(ABDQ&& other) noexcept {
-        if (this->arr && this->arr == other.arr) {
+        if (this == &other) {
             return *this;
         }
         capacity = other.capacity;
@@ -88,7 +79,7 @@ public:
     // Insertion
     void pushFront(const T& item) override {
         if (size == capacity) {
-            reallocate();
+            reallocate(capacity * SCALE_FACTOR);
         }
         for (size_t i = 0; i < size; ++i) {
             arr[size] = arr[size - i];
@@ -98,7 +89,7 @@ public:
     }
     void pushBack(const T& item) override {
         if (size == capacity) {
-            reallocate();
+            reallocate(capacity * SCALE_FACTOR);
         }
         arr[size] = item;
         ++size;
@@ -109,13 +100,13 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty deque");
         }
-        if (size <= capacity / 2) {
-            deallocate();
-        }
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
             arr[i] = arr[i + 1];
+        }
+        if (size > 0 && size <= capacity / 4) {
+            reallocate(capacity / SCALE_FACTOR);
         }
         return val;
     }
@@ -123,11 +114,11 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty deque");
         }
-        if (size <= capacity / 2) {
-            deallocate();
+        T val = arr[--size];
+        if (size > 0 && size <= capacity / 4) {
+            reallocate(capacity / SCALE_FACTOR);
         }
-        --size;
-        return arr[size];
+        return val;
     }
 
     // Access

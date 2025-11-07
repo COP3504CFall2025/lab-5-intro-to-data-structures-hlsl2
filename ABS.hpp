@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include "Interfaces.hpp"
 
-// Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
 
 template<typename T>
@@ -14,18 +13,9 @@ class ABS : public StackInterface<T> {
     T* arr;
     static constexpr size_t SCALE_FACTOR = 2;
 
-    void reallocate() {
+    void reallocate(size_t c) {
         T* temp = arr;
-        capacity *= SCALE_FACTOR;
-        arr = new T[capacity];
-        for (size_t i = 0; i < size; ++i) {
-            arr[i] = temp[i];
-        }
-        delete[] temp;
-    }
-    void deallocate() {
-        T* temp = arr;
-        capacity /= SCALE_FACTOR;
+        capacity = c;
         arr = new T[capacity];
         for (size_t i = 0; i < size; ++i) {
             arr[i] = temp[i];
@@ -33,7 +23,6 @@ class ABS : public StackInterface<T> {
         delete[] temp;
     }
 public:
-    // Big 5 + Parameterized Constructor
     ABS() : capacity(1), size(0), arr(new T[1]) {}
     explicit ABS(const size_t c) : capacity(c), size(0), arr(new T[c]) {}
     ABS(const ABS& other) {
@@ -53,10 +42,10 @@ public:
         other.arr = nullptr;
     }
     ABS& operator=(const ABS& other) {
-        if (this->arr && this->arr == other.arr) {
+        if (this == &other) {
             return *this;
         }
-        delete this;
+        delete arr[];
         capacity = other.capacity;
         size = other.size;
         arr = new T[capacity];
@@ -66,7 +55,7 @@ public:
         return *this;
     }
     ABS& operator=(ABS&& other) noexcept {
-        if (this->arr && this->arr == other.arr) {
+        if (this == &other) {
             return *this;
         }
         capacity = other.capacity;
@@ -79,9 +68,6 @@ public:
     }
     ~ABS() noexcept {
         delete[] arr;
-        arr = nullptr;
-        size = 0;
-        capacity = 1;
     }
 
     // Get the number of items in the ABS
@@ -102,7 +88,7 @@ public:
     // Push item onto the stack
     void push(const T& data) override {
         if (size == capacity) {
-            reallocate();
+            reallocate(capacity * SCALE_FACTOR);
         }
         arr[size] = data;
         ++size;
@@ -112,17 +98,17 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot access empty stack");
         }
-        return arr[size];
+        return arr[size - 1];
     }
 
     T pop() override {
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty stack");
         }
-        if (size <= capacity / 2) {
-            deallocate();
+        T val = arr[--size];
+        if (size > 0 && size <= capacity / 4) {
+            reallocate(capacity / SCALE_FACTOR);
         }
-        --size;
-        return arr[size];
+        return val;
     }
 };

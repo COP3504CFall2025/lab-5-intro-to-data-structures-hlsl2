@@ -14,18 +14,9 @@ class ABQ : public QueueInterface<T>{
     T* arr;
     static constexpr size_t SCALE_FACTOR = 2;
 
-    void reallocate() {
+    void reallocate(size_t c) {
         T* temp = arr;
-        capacity *= SCALE_FACTOR;
-        arr = new T[capacity];
-        for (size_t i = 0; i < size; ++i) {
-            arr[i] = temp[i];
-        }
-        delete[] temp;
-    }
-    void deallocate() {
-        T* temp = arr;
-        capacity /= SCALE_FACTOR;
+        capacity = c;
         arr = new T[capacity];
         for (size_t i = 0; i < size; ++i) {
             arr[i] = temp[i];
@@ -53,10 +44,10 @@ public:
         other.arr = nullptr;
     }
     ABQ& operator=(const ABQ& other) {
-        if (this->arr && this->arr == other.arr) {
+        if (this == &other) {
             return *this;
         }
-        delete this;
+        delete[] arr;
         capacity = other.capacity;
         size = other.size;
         arr = new T[capacity];
@@ -66,7 +57,7 @@ public:
         return *this;
     }
     ABQ& operator=(ABQ&& other) noexcept {
-        if (this->arr && this->arr == other.arr) {
+        if (this == &other) {
             return *this;
         }
         capacity = other.capacity;
@@ -79,9 +70,6 @@ public:
     }
     ~ABQ() noexcept {
         delete[] arr;
-        arr = nullptr;
-        size = 0;
-        capacity = 1;
     }
 
     // Getters
@@ -98,7 +86,7 @@ public:
     // Insertion
     void enqueue(const T& data) override {
         if (size == capacity) {
-            reallocate();
+            reallocate(capacity * SCALE_FACTOR);
         }
         arr[size] = data;
         ++size;
@@ -117,13 +105,13 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot pop empty queue");
         }
-        if (size <= capacity / 2) {
-            deallocate();
-        }
         T val = arr[0];
         --size;
         for (size_t i = 0; i < size; ++i) {
             arr[i] = arr[i + 1];
+        }
+        if (size > 0 && size <= capacity / 4) {
+            reallocate(capacity / SCALE_FACTOR);
         }
         return val;
     }
