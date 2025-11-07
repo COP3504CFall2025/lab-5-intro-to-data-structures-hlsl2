@@ -12,24 +12,21 @@ public:
     LLS() : list() {}
 	LLS(const LLS<T>& lls) : list(lls.list) {}
 	LLS(LLS<T>&& other) noexcept : list(std::move(other.list)) {}
-	LLS<T>& operator=(const LLS<T>& rhs) {
-		if (list.getHead() == rhs.list.getHead()) {
+	LLS<T>& operator=(const LLS<T>& other) {
+		if (this == &other) {
 			return *this;
 		}
-        list.Clear();
-        list = rhs.list;
+        list = other.list;
 		return *this;
 	}
-	LLS<T>& operator=(LinkedList<T>&& other) noexcept {
-		if (list.getHead() == other.list.getHead()) {
+	LLS<T>& operator=(LLS<T>&& other) noexcept {
+		if (this == &other) {
 			return *this;
 		}
 		list = std::move(other.list);
 		return *this;
 	}
-	~LLS() {
-		list.Clear();
-	}
+	~LLS() {}
     void push(const T& item) override {
         list.AddTail(item);
     }
