@@ -21,7 +21,7 @@ public:
 	LinkedList(const LinkedList<T>& list) {
 		count = 0;
 		Node* ptr = list.head;
-		while (count < list.count) {
+		while (ptr) {
 			AddTail(ptr->data);
 			ptr = ptr->next;
 		}
@@ -35,21 +35,22 @@ public:
 		other.count = 0;
 	}
 	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
-		if (head == rhs.head) {
+		if (this == &rhs) {
 			return *this;
 		}
 		Clear();
 		Node* ptr = rhs.head;
-		while (count < rhs.count) {
+		while (ptr) {
 			AddTail(ptr->data);
 			ptr = ptr->next;
 		}
 		return *this;
 	}
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
-		if (head == other.head) {
+		if (this == &other) {
 			return *this;
 		}
+		Clear();
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
@@ -63,17 +64,13 @@ public:
 	}
 	// Behaviors
 	void printForward() const {
-		Node* ptr = head;
-		for (size_t i = 0; i < count; ++i) {
+		for (Node* ptr = head; ptr; ptr = ptr->next) {
 			ptr->print();
-			ptr = ptr->next;
 		}
 	}
 	void PrintReverse() const {
-		Node* ptr = tail;
-		for (size_t i = 0; i < count; ++i) {
+		for (Node* ptr = tail; ptr; ptr = ptr->prev) {
 			ptr->print();
-			ptr = ptr->prev;
 		}
 	}
 
@@ -96,28 +93,30 @@ public:
 
 	// Insertion
 	void AddHead(const T& data) {
-		++count;
-		if (count == 1) {
+		if (!head) {
 			head = new Node(data);
 			tail = head;
+			count = 1;
 			return;
 		}
 		Node* temp = head;
 		head = new Node(data);
 		temp->prev = head;
 		head->next = temp;
+		++count;
 	}
 	void AddTail(const T& data) {
-		++count;
-		if (count == 1) {
+		if (!tail) {
 			tail = new Node(data);
-			head = tail;
+			head = head;
+			count = 1;
 			return;
 		}
 		Node* temp = tail;
 		tail = new Node(data);
 		temp->next = tail;
 		tail->prev = temp;
+		++count;
 	}
 
 	// Removal
