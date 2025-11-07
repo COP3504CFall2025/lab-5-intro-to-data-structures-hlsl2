@@ -45,7 +45,7 @@ public:
         if (this == &other) {
             return *this;
         }
-        delete arr[];
+        delete[] arr;
         capacity = other.capacity;
         size = other.size;
         arr = new T[capacity];
@@ -58,6 +58,7 @@ public:
         if (this == &other) {
             return *this;
         }
+        delete[] arr;
         capacity = other.capacity;
         size = other.size;
         arr = other.arr;
