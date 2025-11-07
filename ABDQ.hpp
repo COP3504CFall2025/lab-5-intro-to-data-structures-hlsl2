@@ -17,12 +17,12 @@ private:
 
     void reallocate(size_t c) {
         T* temp = arr;
-        capacity = c;
-        arr = new T[capacity];
+        arr = new T[c];
         for (std::size_t i = 0; i < size; ++i) {
             arr[i] = temp[(front_ + i) % capacity];
         }
         delete[] temp;
+        capacity = c;
         front_ = 0;
         back_ = size;
     }
@@ -94,7 +94,8 @@ public:
         if (size == capacity) {
             reallocate(capacity * SCALE_FACTOR);
         }
-        --front_; front_ %= capacity;
+        front_ += capacity - 1; 
+        front_ %= capacity;
         arr[front_] = item;
         ++size;
     }
@@ -125,7 +126,8 @@ public:
             throw std::runtime_error("Cannot pop from empty deque");
         }
         T val = arr[back_];
-        --back_; back_ %= capacity;
+        back_ -= capacity - 1; 
+        back_ %= capacity;
         --size;
         if (size > 0 && size <= capacity / 4) {
             reallocate(capacity / SCALE_FACTOR);
