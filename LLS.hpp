@@ -10,25 +10,20 @@ class LLS : public StackInterface<T> {
     LinkedList<T> list;
 public:
     LLS() : list() {}
-	LLS(const LLS<T>& lls) {
-        list = LinkedList(lls.list);
-	}
-	LLS(LLS<T>&& other) noexcept {
-		list = std::move(other.list);
-	}
+	LLS(const LLS<T>& lls) : list(lls.list) {}
+	LLS(LLS<T>&& other) noexcept : list(std::move(other.list)) {}
 	LLS<T>& operator=(const LLS<T>& rhs) {
 		if (list.getHead() == rhs.list.getHead()) {
 			return *this;
 		}
         list.Clear();
-        list = LinkedList(rhs.list);
+        list = rhs.list;
 		return *this;
 	}
 	LLS<T>& operator=(LinkedList<T>&& other) noexcept {
 		if (list.getHead() == other.list.getHead()) {
 			return *this;
 		}
-        list.Clear();
 		list = std::move(other.list);
 		return *this;
 	}
