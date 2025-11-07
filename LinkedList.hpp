@@ -59,12 +59,15 @@ public:
 		Clear();
 	}
 	// Behaviors
-	void printForward() const {
+	void PrintForward() const {
 		Node* ptr = head;
 		for (size_t i = 0; i < count; ++i) {
 			ptr->print();
 			ptr = ptr->next;
 		}
+	}
+	void printForward() const {
+		PrintForward();
 	}
 	void PrintReverse() const {
 		Node* ptr = tail;
@@ -72,6 +75,9 @@ public:
 			ptr->print();
 			ptr = ptr->prev;
 		}
+	}
+	void printReverse() const {
+		PrintReverse();
 	}
 
 	// Accessors
@@ -104,6 +110,9 @@ public:
 		temp->prev = head;
 		head->next = temp;
 	}
+	void addHead(const T& data) {
+		AddHead(data);
+	}
 	void AddTail(const T& data) {
 		++count;
 		if (count == 1) {
@@ -115,6 +124,9 @@ public:
 		tail = new Node(data);
 		temp->next = tail;
 		tail->prev = temp;
+	}
+	void addTail(const T& data) {
+		AddTail(data);
 	}
 
 	// Removal
@@ -135,6 +147,9 @@ public:
 		head->prev = nullptr;
 		return true;
 	}
+	bool removeHead() {
+		RemoveHead();
+	}
 	bool RemoveTail() {
 		if (count == 0) {
 			return false;
@@ -152,7 +167,13 @@ public:
 		tail->next = nullptr;
 		return true;
 	}
+	bool removeTail() {
+		RemoveTail();
+	}
 	void Clear() {
 		while (RemoveHead());
+	}
+	void clear() {
+		Clear();
 	}
 };
