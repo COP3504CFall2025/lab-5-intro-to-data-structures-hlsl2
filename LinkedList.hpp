@@ -18,12 +18,10 @@ class LinkedList {
 	unsigned int count;
 public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {}
-	LinkedList(const LinkedList<T>& list) {
+	LinkedList(const LinkedList<T>& other) {
 		count = 0;
-		Node* ptr = list.head;
-		while (count < list.count) {
+		for (Node* ptr = other.head; ptr; ptr = ptr->next) {
 			AddTail(ptr->data);
-			ptr = ptr->next;
 		}
 	}
 	LinkedList(LinkedList<T>&& other) noexcept {
@@ -34,22 +32,21 @@ public:
 		other.tail = nullptr;
 		other.count = 0;
 	}
-	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
-		if (head == rhs.head) {
+	LinkedList<T>& operator=(const LinkedList<T>& other) {
+		if (this == &other) {
 			return *this;
 		}
 		Clear();
-		Node* ptr = rhs.head;
-		while (count < rhs.count) {
+		for (Node* ptr = other.head; ptr; ptr = ptr->next) {
 			AddTail(ptr->data);
-			ptr = ptr->next;
 		}
 		return *this;
 	}
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
-		if (head == other.head) {
+		if (this == &other) {
 			return *this;
 		}
+		Clear();
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
