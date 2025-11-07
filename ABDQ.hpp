@@ -147,7 +147,7 @@ public:
         if (size == 0) {
             throw std::runtime_error("Cannot access empty deque");
         }
-        return arr[back_];
+        return arr[(back_ + capacity - 1) % capacity];
     }
 
     // Getters
