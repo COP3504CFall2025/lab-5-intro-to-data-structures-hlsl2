@@ -14,6 +14,7 @@ class ABS : public StackInterface<T> {
     static constexpr size_t SCALE_FACTOR = 2;
 
     void reallocate(size_t c) {
+        if (c < 1) c = 1;
         T* temp = arr;
         capacity = c;
         arr = new T[capacity];
@@ -107,7 +108,7 @@ public:
             throw std::runtime_error("Cannot pop empty stack");
         }
         T val = arr[--size];
-        if (size > 0 && size * 4 <= capacity) {
+        if (size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;

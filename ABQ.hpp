@@ -15,6 +15,7 @@ class ABQ : public QueueInterface<T>{
     static constexpr size_t SCALE_FACTOR = 2;
 
     void reallocate(size_t c) {
+        if (c < 1) c = 1;
         T* temp = arr;
         capacity = c;
         arr = new T[capacity];
@@ -110,7 +111,7 @@ public:
         for (size_t i = 0; i < size; ++i) {
             arr[i] = arr[i + 1];
         }
-        if (size > 0 && size * 4 <= capacity) {
+        if (size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;

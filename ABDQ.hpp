@@ -16,6 +16,7 @@ private:
     static constexpr std::size_t SCALE_FACTOR = 2;
 
     void reallocate(size_t c) {
+        if (c < 1) c = 1;
         T* temp = arr;
         arr = new T[c];
         for (std::size_t i = 0; i < size; ++i) {
@@ -117,7 +118,7 @@ public:
         T val = arr[front_];
         ++front_; front_ %= capacity;
         --size;
-        if (size > 0 && size * 4 <= capacity) {
+        if (size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;
@@ -130,7 +131,7 @@ public:
         back_ %= capacity;
         T val = arr[back_];
         --size;
-        if (size > 0 && size * 4 <= capacity) {
+        if (size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;
