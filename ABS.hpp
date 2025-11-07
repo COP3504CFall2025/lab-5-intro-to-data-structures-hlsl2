@@ -106,7 +106,7 @@ public:
             throw std::runtime_error("Cannot pop empty stack");
         }
         T val = arr[--size];
-        if (size > 0 && size <= capacity / 4) {
+        if (size > 0 && size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;

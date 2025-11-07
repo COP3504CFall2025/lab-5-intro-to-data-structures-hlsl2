@@ -110,7 +110,7 @@ public:
         for (size_t i = 0; i < size; ++i) {
             arr[i] = arr[i + 1];
         }
-        if (size > 0 && size <= capacity / 4) {
+        if (size > 0 && size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;

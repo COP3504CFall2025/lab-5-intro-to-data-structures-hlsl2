@@ -117,7 +117,7 @@ public:
         T val = arr[front_];
         ++front_; front_ %= capacity;
         --size;
-        if (size > 0 && size <= capacity / 4) {
+        if (size > 0 && size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;
@@ -130,7 +130,7 @@ public:
         back_ %= capacity;
         T val = arr[back_];
         --size;
-        if (size > 0 && size <= capacity / 4) {
+        if (size > 0 && size * 4 <= capacity) {
             reallocate(capacity / SCALE_FACTOR);
         }
         return val;
